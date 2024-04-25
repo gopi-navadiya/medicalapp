@@ -1,0 +1,114 @@
+import 'package:flutter/material.dart';
+import 'package:medicalapp/Infrastructure/Commons/color_constant.dart';
+import 'package:medicalapp/UI/Commons/Widgets/common_text_style.dart';
+
+commonTextField(
+    {required BuildContext context,
+      required String hint,
+      bool obscureText = false,
+      bool showOnFocusBorder = false,
+      bool showBorder = true,
+      bool addPadding = false,
+      bool isDense = true,
+      Widget? suffixIcon,
+      Widget? prefixIcon,
+      bool? suffixIconSpace,
+      FocusNode? focusNode,
+      bool readOnly = false,
+      FormFieldValidator<String>? validator,
+      TextCapitalization? textCapitalization,
+      ValueChanged<String>? onChanged,
+      void Function(String?)? onFieldSubmitted,
+      Function()? onEditingComplete,
+      GestureTapCallback? onTap,
+      TextInputType? textInputType,
+      TextInputAction? textInputAction,
+      int maxLine = 1,
+      int minLine = 1,
+      double? borderRadius,
+      TextAlignVertical? textAlignVertical = TextAlignVertical.center,
+      TextStyle? textStyle,
+      EdgeInsetsGeometry? padding,
+      required TextEditingController controller}) {
+  return Container(
+    decoration: BoxDecoration(
+        boxShadow: MediaQuery.of(context).platformBrightness == Brightness.dark
+            ? []
+            : [
+          BoxShadow(
+              color: ThemeColors.primary(context).withOpacity(0.1),
+              blurRadius: 25,
+              offset: const Offset(0, 4),
+              spreadRadius: 1)
+        ]),
+    child: TextFormField(
+      validator: validator,
+      keyboardType: textInputType ?? TextInputType.text,
+      obscuringCharacter: "*",
+      controller: controller,
+      readOnly: readOnly,
+      onTap: onTap,
+      obscureText: obscureText,
+      maxLines: maxLine,
+      minLines: minLine,
+      onFieldSubmitted: onFieldSubmitted,
+      style: textStyle ??
+          TextStyleConstant.commonStyle(
+              context: context, fontWeight: FontWeight.w400, fontSize: 14),
+      textCapitalization: textCapitalization ?? TextCapitalization.none,
+      onChanged: onChanged,
+      textInputAction: textInputAction ?? TextInputAction.done,
+      textAlignVertical: textAlignVertical ?? TextAlignVertical.bottom,
+      decoration: InputDecoration(
+          isDense: isDense,
+          prefixIconConstraints: const BoxConstraints(
+              minWidth: 46,
+              maxWidth:46,
+              minHeight: 18,
+              maxHeight: 18),
+          suffixIconConstraints: const BoxConstraints(
+              minWidth: 46,
+              maxWidth: 46,
+              minHeight: 18,
+              maxHeight: 18),
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
+          filled: true,
+          fillColor: ThemeColors.inversePrimary(context),
+          errorStyle: TextStyleConstant.commonStyle(
+              context: context,
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+              color: Colors.redAccent),
+          focusedBorder: showBorder
+              ? (showOnFocusBorder
+              ? enabledBorder(context,borderRadius: borderRadius)
+              : customBorder(context,borderRadius: borderRadius))
+              : InputBorder.none,
+          enabledBorder:
+          showBorder ? (customBorder(context,borderRadius: borderRadius)) : InputBorder.none,
+          disabledBorder:
+          showBorder ? (customBorder(context,borderRadius: borderRadius)) : InputBorder.none,
+          border: showBorder ? customBorder(context,borderRadius: borderRadius) : InputBorder.none,
+          contentPadding:
+          const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          hintText: hint,
+          hintStyle: TextStyleConstant.commonStyle(
+              color: ThemeColors.secondary(context),
+              fontSize: 14,
+              fontWeight: FontWeight.w300,
+              context: context)),
+      focusNode: focusNode,
+    ),
+  );
+}
+
+customBorder(BuildContext context,{double? borderRadius}) {
+  return OutlineInputBorder(
+      borderSide: BorderSide.none, borderRadius: BorderRadius.circular(borderRadius ?? 25));
+}
+
+enabledBorder(BuildContext context,{double? borderRadius}) {
+  return OutlineInputBorder(
+      borderSide: BorderSide.none, borderRadius: BorderRadius.circular(borderRadius ?? 12));
+}

@@ -52,76 +52,66 @@ class _FourthOnBoardingState extends State<FourthOnBoarding>
             fadingDuration: const Duration(milliseconds: 750),
             delay: const Duration(milliseconds: 50),
             slidingBeginOffset: const Offset(0, 1),
-            child: Stack(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
-                    widget.fileUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                    top: 13,
-                    left: 25,
-                    child: SafeArea(
-                        child: Image.asset(
-                      ImageConstant.coloredLogoPng,
-                      width: 36,
-                      height: 36,
-                    )))
-              ],
+            child:  SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Image.asset(
+                widget.fileUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: DelayedDisplay(
-                  slideIn: true,
-                  slideDuration: const Duration(milliseconds: 750),
-                  delay: const Duration(milliseconds: 50),
-                  slidingBeginOffset: const Offset(0, .2),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Image.asset(
-                      ImageConstant.onboardingFourBG,
-                      fit: BoxFit.fill,
-                    ).paddingOnly(top: 4),
+          Container(
+            color: ThemeColors.background(context),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: DelayedDisplay(
+                    slideIn: true,
+                    slideDuration: const Duration(milliseconds: 750),
+                    delay: const Duration(milliseconds: 50),
+                    slidingBeginOffset: const Offset(0, .2),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Image.asset(
+                        ImageConstant.onboardingFourBG,
+                        fit: BoxFit.fill,
+                      ).paddingOnly(top: 4),
+                    ),
                   ),
                 ),
-              ),
-              HeadlineBodyOneBaseWidget(
-                title: AppConstant.eCom.tr,
-                fontSize: 14,
-                fontFamily: FontConstant.blinkerRegular,
-                titleColor: const Color(0xffBDBDBD),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              HeadlineBodyOneBaseWidget(
-                title: AppConstant.onBoardingFourthTitle.tr,
-                fontSize: 50,
-                fontFamily: FontConstant.blinkerRegular,
-                titleColor: ThemeColors.primary(context),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              HeadlineBodyOneBaseWidget(
-                title:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
-                fontSize: 14,
-                fontFamily: FontConstant.blinkerRegular,
-                titleColor: ThemeColors.primary(context).withOpacity(.6),
-              ),
-              const SizedBox(
-                height: 26,
-              ),
-            ],
-          ).paddingSymmetric(horizontal: 24, vertical: 48),
+                HeadlineBodyOneBaseWidget(
+                  title: AppConstant.eCom.tr,
+                  fontSize: 14,
+                  fontFamily: FontConstant.blinkerRegular,
+                  titleColor: const Color(0xffBDBDBD),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                HeadlineBodyOneBaseWidget(
+                  title: AppConstant.onBoardingFourthTitle.tr,
+                  fontSize: 50,
+                  fontFamily: FontConstant.blinkerRegular,
+                  titleColor: ThemeColors.primary(context),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                HeadlineBodyOneBaseWidget(
+                  title:
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
+                  fontSize: 14,
+                  fontFamily: FontConstant.blinkerRegular,
+                  titleColor: ThemeColors.primary(context).withOpacity(.6),
+                ),
+                const SizedBox(
+                  height: 26,
+                ),
+              ],
+            ).paddingSymmetric(horizontal: 24, vertical: 48),
+          ),
         ],
       ),
     );

@@ -33,19 +33,13 @@ class SetNewPasswordScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 15),
-                    Image.asset(
-                      ImageConstant.setNewPwdImg,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
+
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 20),
                           HeadlineBodyOneBaseWidget(
                             title: AppConstant.setNewPassword.tr,
                             style:

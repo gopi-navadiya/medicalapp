@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:medicalapp/Infrastructure/Commons/color_constant.dart';
 import 'package:medicalapp/Infrastructure/Commons/controller_id.dart';
@@ -28,9 +26,8 @@ class CartScreen extends GetView<CartController> {
             body: Column(
               children: [
                 const CommonMainAppBar(),
-                const SizedBox(height: 16),
                 Expanded(
-                  child: HeadlineBodyOneBaseWidget(title: "Cart",),
+                  child: Center(child: HeadlineBodyOneBaseWidget(title: "Cart screen",)),
                 ),
               ],
             ).paddingSymmetric(horizontal: 24, vertical: 24),

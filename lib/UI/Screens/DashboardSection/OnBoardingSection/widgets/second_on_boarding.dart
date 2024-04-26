@@ -51,26 +51,13 @@ class _SecondOnBoardingState extends State<SecondOnBoarding>
             fadingDuration: const Duration(milliseconds: 750),
             delay: const Duration(milliseconds: 50),
             slidingBeginOffset: const Offset(0, 1),
-            child: Stack(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: Image.asset(
-                    widget.fileUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                    top: 13,
-                    left: 25,
-                    child: SafeArea(
-                        child: Image.asset(
-                      ImageConstant.coloredLogoPng,
-                      width: 36,
-                      height: 36,
-                    )))
-              ],
+            child:  SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Image.asset(
+                widget.fileUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Column(

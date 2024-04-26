@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medicalapp/Infrastructure/Commons/app_constant.dart';
@@ -51,73 +52,64 @@ class _ThirdOnBoardingState extends State<ThirdOnBoarding>
             fadingDuration: const Duration(milliseconds: 750),
             delay: const Duration(milliseconds: 50),
             slidingBeginOffset: const Offset(0, 1),
-            child: Stack(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
-                    widget.fileUrl,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                    top: 13,
-                    left: 25,
-                    child: SafeArea(
-                        child: Image.asset(
-                      ImageConstant.coloredLogoPng,
-                      width: 36,
-                      height: 36,
-                    )))
-              ],
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Image.asset(
+                widget.fileUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: DelayedDisplay(
-                  slideIn: true,
-                  slideDuration: const Duration(milliseconds: 750),
-                  delay: const Duration(milliseconds: 50),
-                  slidingBeginOffset: const Offset(0, .2),
-                  child: Image.asset(
-                    ImageConstant.onboardingOThreeBG,
-                    fit: BoxFit.contain,
-                  ).paddingOnly(top: 4),
+          Container(
+            color: ThemeColors.background(context),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: DelayedDisplay(
+
+                    slideIn: true,
+                    slideDuration: const Duration(milliseconds: 750),
+                    delay: const Duration(milliseconds: 50),
+                    slidingBeginOffset: const Offset(0, .2),
+                    child: Image.asset(
+                      ImageConstant.onboardingOThreeBG,
+                      fit: BoxFit.contain,
+                    ).paddingOnly(top: 4),
+                  ),
                 ),
-              ),
-              HeadlineBodyOneBaseWidget(
-                title: AppConstant.eCom.tr,
-                fontSize: 14,
-                fontFamily: FontConstant.blinkerRegular,
-                titleColor: const Color(0xffBDBDBD),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              HeadlineBodyOneBaseWidget(
-                title: AppConstant.onBoardingThirdTitle.tr,
-                fontSize: 50,
-                fontFamily: FontConstant.blinkerRegular,
-                titleColor: ThemeColors.primary(context),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              HeadlineBodyOneBaseWidget(
-                title:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
-                fontSize: 14,
-                fontFamily: FontConstant.blinkerRegular,
-                titleColor: ThemeColors.primary(context).withOpacity(.6),
-              ),
-              const SizedBox(
-                height: 26,
-              ),
-            ],
-          ).paddingSymmetric(horizontal: 24, vertical: 48),
+                HeadlineBodyOneBaseWidget(
+                  title: AppConstant.eCom.tr,
+                  fontSize: 14,
+                  fontFamily: FontConstant.blinkerRegular,
+                  titleColor: const Color(0xffBDBDBD),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                HeadlineBodyOneBaseWidget(
+                  title: AppConstant.onBoardingThirdTitle.tr,
+                  fontSize: 50,
+                  fontFamily: FontConstant.blinkerRegular,
+                  titleColor: ThemeColors.primary(context),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                HeadlineBodyOneBaseWidget(
+                  title:
+                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
+                  fontSize: 14,
+                  fontFamily: FontConstant.blinkerRegular,
+                  titleColor: ThemeColors.primary(context).withOpacity(.6),
+                ),
+                const SizedBox(
+                  height: 26,
+                ),
+              ],
+            ).paddingSymmetric(horizontal: 24, vertical: 48),
+          ),
         ],
       ),
     );

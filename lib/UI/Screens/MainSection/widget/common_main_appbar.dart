@@ -9,12 +9,7 @@ class CommonMainAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-            height: 36,
-            width: 36,
-            child: Image.asset(ImageConstant.coloredLogoPng),
-        ),
-        const Spacer(),
+
         Row(
           children: [
             SvgPicture.asset(

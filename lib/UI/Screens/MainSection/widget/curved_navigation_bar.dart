@@ -58,13 +58,13 @@ class CurvedNavigationBar extends StatefulWidget {
 
 class CurvedNavigationBarState extends State<CurvedNavigationBar>
     with SingleTickerProviderStateMixin {
-  // late double _startingPos;
+   late double _startingPos;
   late double _pos;
   late AnimationController _animationController;
   late int _length;
 
-  // int _endingIndex = 0;
-  // double _buttonHide = 0;
+  int _endingIndex = 0;
+  double _buttonHide = 0;
 
   double height = (Platform.isAndroid ? 70.0 : 80.0);
 
@@ -73,14 +73,14 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
     super.initState();
     _length = widget.items.length;
     _pos = widget.index / _length;
-    // _startingPos = widget.index / _length;
+    _startingPos = widget.index / _length;
     _animationController = AnimationController(vsync: this, value: _pos);
     _animationController.addListener(() {
       setState(() {
         _pos = _animationController.value;
-        // final endingPos = _endingIndex / widget.items.length;
-        // final middle = (endingPos + _startingPos) / 2;
-        // _buttonHide = (1 - ((middle - _pos) / (_startingPos - middle)).abs()).abs();
+        final endingPos = _endingIndex / widget.items.length;
+        final middle = (endingPos + _startingPos) / 2;
+        _buttonHide = (1 - ((middle - _pos) / (_startingPos - middle)).abs()).abs();
       });
     });
   }
@@ -90,8 +90,8 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.index != widget.index) {
       final newPosition = widget.index / _length;
-      // _startingPos = 2;
-      // _endingIndex = widget.index;
+      _startingPos = 2;
+      _endingIndex = widget.index;
       _animationController.animateTo(
         newPosition,
         duration: widget.animationDuration,
@@ -217,8 +217,8 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
     }
     final newPosition = index / _length;
     setState(() {
-      // _startingPos = _pos;
-      // _endingIndex = index;
+      _startingPos = _pos;
+      _endingIndex = index;
       _animationController.animateTo(
         newPosition,
         duration: widget.animationDuration,

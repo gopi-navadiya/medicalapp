@@ -1,3 +1,4 @@
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,9 +6,9 @@ import 'package:get/get.dart';
 import 'package:medicalapp/Infrastructure/Commons/color_constant.dart';
 import 'package:medicalapp/Infrastructure/Commons/controller_id.dart';
 import 'package:medicalapp/Infrastructure/Commons/image_contstant.dart';
+import 'package:medicalapp/Infrastructure/Services/api_methods.dart';
 import 'package:medicalapp/UI/Screens/MainSection/CartSection/cart_screen.dart';
 import 'package:medicalapp/UI/Screens/MainSection/ProfileSection/profile_screen.dart';
-import 'package:medicalapp/UI/Screens/MainSection/QrSection/qr_screen.dart';
 import 'package:medicalapp/UI/Screens/MainSection/WishListSection/wishlist_screen.dart';
 
 import 'HomeSection/home_screen.dart';
@@ -22,27 +23,29 @@ class MainScreen extends GetView<MainController> {
   Widget build(BuildContext context) {
     return GetBuilder<MainController>(
         init: MainController(),
-        id: ControllerId.loginKey,
+        id: ControllerId.mainKey,
         builder: (controller) {
           return AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.light
-                .copyWith(systemNavigationBarColor: ThemeColors.inversePrimary(context)),
+            value: SystemUiOverlayStyle.light.copyWith(systemNavigationBarColor: ThemeColors.inversePrimary(context)),
             child: Scaffold(
               backgroundColor: ThemeColors.background(context),
               body: PageView(
                 physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: (value) => controller.currentPage.value = value,
+                onPageChanged: (value) {
+                  controller.currentPage.value = value;
+                  controller.update([ControllerId.mainKey]);
+                },
                 controller: controller.pageController,
                 children: [
-                  const CommonWrapper(
-                    child: HomeScreen(),
+                  CommonWrapper(
+                    child: HomeScreen(scannedItems: controller.scannedItems),
                   ),
                   const CommonWrapper(
                     child: CartScreen(),
                   ),
                   CommonWrapper(
                     child: Container(
-                      color: Colors.white,
+                      color: Colors.transparent,
                     ),
                   ),
                   const CommonWrapper(
@@ -54,8 +57,7 @@ class MainScreen extends GetView<MainController> {
                 ],
               ),
               extendBody: true,
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerDocked,
+              floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
               bottomNavigationBar: Container(
                 decoration: BoxDecoration(
                   boxShadow: <BoxShadow>[
@@ -72,60 +74,62 @@ class MainScreen extends GetView<MainController> {
                     CurvedNavigationBarItem(
                       child: SvgPicture.asset(
                         ImageConstant.homeIcon,
-                        colorFilter: ColorFilter.mode(
-                            ThemeColors.primary(context), BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(ThemeColors.primary(context), BlendMode.srcIn),
                       ),
                     ),
                     CurvedNavigationBarItem(
                       child: SvgPicture.asset(
                         ImageConstant.basketIcon,
-                        colorFilter: ColorFilter.mode(
-                            ThemeColors.primary(context), BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(ThemeColors.primary(context), BlendMode.srcIn),
                       ),
                     ),
                     CurvedNavigationBarItem(
                       child: SvgPicture.asset(
                         ImageConstant.scanIcon,
                         colorFilter: ColorFilter.mode(
-                            MediaQuery.of(context).platformBrightness ==
-                                    Brightness.dark
-                                ? ColorConstants.blackBg
-                                : ColorConstants.whiteBg,
+                            MediaQuery.of(context).platformBrightness == Brightness.dark ? ColorConstants.blackBg : ColorConstants.whiteBg,
                             BlendMode.srcIn),
                       ),
                     ),
                     CurvedNavigationBarItem(
                       child: SvgPicture.asset(
                         ImageConstant.saveMarkIcon,
-                        colorFilter: ColorFilter.mode(
-                            ThemeColors.primary(context), BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(ThemeColors.primary(context), BlendMode.srcIn),
                       ),
                     ),
                     CurvedNavigationBarItem(
                       child: SvgPicture.asset(
                         ImageConstant.personIcon,
-                        colorFilter: ColorFilter.mode(
-                            ThemeColors.primary(context), BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(ThemeColors.primary(context), BlendMode.srcIn),
                       ),
                     ),
                   ],
-                  color:
-                      MediaQuery.of(context).platformBrightness == Brightness.dark
-                          ? ThemeColors.inversePrimary(context)
-                          : ColorConstants.white,
+                  color: MediaQuery.of(context).platformBrightness == Brightness.dark ? ThemeColors.inversePrimary(context) : ColorConstants.white,
                   buttonBackgroundColor:
-                      MediaQuery.of(context).platformBrightness == Brightness.dark
-                          ? ThemeColors.buttonActive
-                          : ThemeColors.primary(context),
+                      MediaQuery.of(context).platformBrightness == Brightness.dark ? ThemeColors.buttonActive : ThemeColors.primary(context),
                   backgroundColor: Colors.transparent,
                   animationCurve: Curves.easeInOut,
                   onTap: (index) {
-                    if (index == 2) {
-                      Get.to(const QrScreen());
-                      return;
-                    }
                     controller.currentPage.value = index;
-                    controller.update();
+                    controller.update([ControllerId.mainKey]);
+
+                    if (controller.currentPage.value == 2) {
+                      BarcodeScanner.scan().then((value) {
+                        controller.barcode.value = value.rawContent;
+                        controller.update([ControllerId.mainKey]);
+                        if (controller.barcode.isNotEmpty) {
+                          ApiMethods.getDataFromScanner(upc: controller.barcode.value, context: context).then((value) {
+                            if (value != null) {
+                              controller.scannedItems = value.items ?? [];
+                              if (controller.scannedItems.isNotEmpty) {
+                                controller.currentPage.value = 0;
+                              }
+                              controller.update([ControllerId.mainKey]);
+                            }
+                          });
+                        }
+                      });
+                    }
                     controller.animateToPage(index);
                   },
                   letIndexChange: (index) => true,

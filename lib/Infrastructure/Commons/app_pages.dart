@@ -62,7 +62,7 @@ class AppPages {
     ),
     GetPage(
       name: RouteConstant.homeScreen,
-      page: () => const HomeScreen(),
+      page: () => const HomeScreen(scannedItems: [],),
       binding: HomeBindings(),
     ),
   ];

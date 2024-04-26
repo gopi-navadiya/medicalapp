@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:medicalapp/Infrastructure/Commons/app_constant.dart';
 import 'package:medicalapp/Infrastructure/Commons/color_constant.dart';
@@ -94,7 +93,7 @@ class _FirstOnBoardingState extends State<FirstOnBoarding>
                 alignment: Alignment.bottomCenter,
                 child: IntrinsicHeight(
                   child: Container(
-                    height: MediaQuery.sizeOf(context).height * .45,
+                    height: MediaQuery.sizeOf(context).height * .5,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: ThemeColors.background(context),

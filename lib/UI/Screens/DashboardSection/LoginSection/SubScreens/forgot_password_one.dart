@@ -29,74 +29,60 @@ class ForgotPasswordOne extends StatelessWidget {
             backgroundColor: ThemeColors.background(context),
             body: Container(
               padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 25),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(ImageConstant.onboardingTwo),
-                      fit: BoxFit.fill)),
+
               width: double.infinity,
               height: double.infinity,
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      ImageConstant.passwordRecoveryGirl,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                      height: MediaQuery.of(context).size.height * 0.55,
+                    const SizedBox(height: 20),
+                    HeadlineBodyOneBaseWidget(
+                      title: AppConstant.passwordRecovery.tr,
+                      style:
+                          TextStyleConstant.commonStyle(context: context),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-                        HeadlineBodyOneBaseWidget(
-                          title: AppConstant.passwordRecovery.tr,
-                          style:
-                              TextStyleConstant.commonStyle(context: context),
-                        ),
-                        HeadlineBodyOneBaseWidget(
-                          title: AppConstant.enterEmailRecover.tr,
-                          style: TextStyleConstant.commonStyle(
-                              context: context,
-                              color: ThemeColors.secondary(context),
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14),
-                        ),
-                        const SizedBox(height: 28),
-                        commonTextField(
-                            context: context,
-                            controller:
-                                controller.txtForgotEmailController.value,
-                            hint: AppConstant.emailAddress.tr,
-                            prefixIcon: SvgPicture.asset(
-                              ImageConstant.email,
-                            )),
-                        const SizedBox(height: 18),
-                        CommonInkWell(
-                          onTap: () {
+                    HeadlineBodyOneBaseWidget(
+                      title: AppConstant.enterEmailRecover.tr,
+                      style: TextStyleConstant.commonStyle(
+                          context: context,
+                          color: ThemeColors.secondary(context),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14),
+                    ),
+                    const SizedBox(height: 28),
+                    commonTextField(
+                        context: context,
+                        controller:
+                            controller.txtForgotEmailController.value,
+                        hint: AppConstant.emailAddress.tr,
+                        prefixIcon: SvgPicture.asset(
+                          ImageConstant.email,
+                        )),
+                    const SizedBox(height: 18),
+                    CommonInkWell(
+                      onTap: () {
 
-                          },
-                          child: HeadlineBodyOneBaseWidget(
-                            title: AppConstant.useAnotherMethod.tr,
-                            style: TextStyleConstant.commonStyle(
-                              context: context,
-                              color: ColorConstants.commonYellow,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
+                      },
+                      child: HeadlineBodyOneBaseWidget(
+                        title: AppConstant.useAnotherMethod.tr,
+                        style: TextStyleConstant.commonStyle(
+                          context: context,
+                          color: ColorConstants.commonYellow,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
                         ),
-                        const SizedBox(height: 28),
-                        CommonButton(
-                          buttonColor: ColorConstants.commonYellow,
-                          titleColor: ColorConstants.blackBg,
-                          title: AppConstant.next.tr,
-                          onTap: () {
-                             Get.toNamed(RouteConstant.setNewPasswordScreen);
-                          },
-                        )
-                      ],
+                      ),
+                    ),
+                    const SizedBox(height: 28),
+                    CommonButton(
+                      buttonColor: ColorConstants.commonYellow,
+                      titleColor: ColorConstants.blackBg,
+                      title: AppConstant.next.tr,
+                      onTap: () {
+                         Get.toNamed(RouteConstant.setNewPasswordScreen);
+                      },
                     )
                   ],
                 ),

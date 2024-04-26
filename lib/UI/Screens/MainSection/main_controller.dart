@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medicalapp/Infrastructure/Commons/controller_id.dart';
+import 'package:medicalapp/Infrastructure/Models/scanned_data_model.dart';
 
 class MainController extends GetxController {
   RxInt currentPage = 0.obs;
   final PageController pageController = PageController();
-
+  RxString barcode = ''.obs;
+    List<ScannedItem> scannedItems=[];
   animateToPage(int page, {withAnimation = false}) {
     currentPage.value = page;
-    update();
+    update([ControllerId.mainKey]);
     pageController.animateToPage(
       page,
       duration: Duration(milliseconds: withAnimation ? 250 : 1),

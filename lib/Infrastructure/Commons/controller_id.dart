@@ -9,6 +9,7 @@ class ControllerId {
   static String createAccountKey = "createAccountKey";
   static String setUpAccountKey = "setUpAccountKey";
   static String homeKey = "homeKey";
+  static String mainKey = "mainKey";
   static String cartKey = "cartKey";
   static String profileKey = "profileKey";
   static String qrKey = "qrKey";
